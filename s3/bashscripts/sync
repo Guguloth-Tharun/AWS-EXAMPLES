@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+set -e
+
+OUTPUT_DIR=/tmp/s3/
+
+rm -rf $OUTPUT_DIR
+
+mkdir -p $OUTPUT_DIR
+
+if [ -z "$1" ]; then
+   echo " Specify the bucket name to be created "
+fi
+
+if [ -z "$2" ]; then
+   echo " Specify the bucket name to be created "
+fi
+
+BUCKET_NAME="$1"
+FILE_NAME_PREFIX="$2"
+
+NUM_FILES=$(( RANDOM % 6 + 5 ))
+for ((i=1; i<=$NUM_FILES; i++)); do 
+
+    FILENAME="$OUTPUT_DIR/${FILE_NAME_PREFIX}_$i.txt"
+
+    dd if=/dev/urandom of="$FILENAME" \
+    bs=1024 \
+    count=$(( RANDOM % 1024 + 1 )) \
+    2>/dev/null
+done
+
+tree $OUTPUT_DIR
+
+aws s3 sync $OUTPUT_DIR s3://$BUCKET_NAME/files

@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+if [ -z "$1" ]; then
+   echo "Kindly provide the bucket name"
+   exit 1
+fi
+
+if [ -z "$2" ]; then
+   echo "Kindly provide the file name"
+   exit 1
+fi
+
+BUCKET_NAME="$1"
+FILE_NAME="$2"
+
+Object_key=$(basename "$FILE_NAME")
+
+aws s3api put-object \
+--bucket $BUCKET_NAME \
+--body $FILE_NAME \
+--key $Object_key
