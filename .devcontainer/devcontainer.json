@@ -4,10 +4,13 @@
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
 
   "remoteEnv": {
+    "AWS_ACCESS_KEY_ID":"${localEnv:AWS_ACCESS_KEY_ID}",
+    "AWS_SECRET_ACCESS_KEY":"${localEnv:AWS_SECRET_ACCESS_KEY}",
+    ""
     "AWS_CLI_AUTO_PROMPT": "on-partial"
   },
 
-  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y unzip jq zip tree wget apt-transport-https software-properties-common && curl \"https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip\" -o awscliv2.zip && unzip -o awscliv2.zip && sudo ./aws/install && rm -rf aws awscliv2.zip && . /etc/os-release && wget -q https://packages.microsoft.com/config/ubuntu/$VERSION_ID/packages-microsoft-prod.deb && sudo dpkg -i packages-microsoft-prod.deb && rm packages-microsoft-prod.deb && sudo apt-get update && sudo apt-get install -y powershell",
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y unzip jq zip tree wget apt-transport-https software-properties-common ruby-full ruby-bundler default-jre && curl \"https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip\" -o awscliv2.zip && unzip -o awscliv2.zip && sudo ./aws/install && rm -rf aws awscliv2.zip && . /etc/os-release && wget -q https://packages.microsoft.com/config/ubuntu/$VERSION_ID/packages-microsoft-prod.deb && sudo dpkg -i packages-microsoft-prod.deb && rm packages-microsoft-prod.deb && sudo apt-get update && sudo apt-get install -y powershell",
 
 //https://docs.aws.amazon.com/powershell/v5/userguide/install-aws.tools-on-linux-macos.html
 //Install-Module -Name AWS.Tools.Installer
