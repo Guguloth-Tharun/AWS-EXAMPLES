@@ -1,0 +1,8 @@
+# https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-s3-bucket.html
+
+AWSTemplateFormatVersion: "2010-09-09"
+Description: A simple S3 bucket
+Resources:
+ S3Bucket:
+   Type: 'AWS::S3::Bucket'
+   #We don't need to provide a bucket name as AWS will provide random name to us
